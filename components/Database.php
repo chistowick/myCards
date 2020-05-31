@@ -11,7 +11,7 @@ class Database {
     public static function getConnection() {
 
         // Determining the path to the configuration file
-        $path_to_config = $_SERVER["DOCUMENT_ROOT"] . '/../htconfig/dbconnect.php';
+        $path_to_config = $_SERVER["DOCUMENT_ROOT"] . '/htconfig/dbconnect_my_cards.php';
 
         // Connecting database config
         include ($path_to_config);
