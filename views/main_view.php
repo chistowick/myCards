@@ -60,5 +60,7 @@
             </div>
         </div>
         <div id="footer"><p id="copy">&copy; 2020 Анатолий Чиняев</p></div>
+
+        <script src='js/getCards.js'></script>
     </body>
 </html>
