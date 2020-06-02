@@ -3,19 +3,28 @@
 // Set an event listener for each element. (selector, event, action)
 window.onload = getCards();
 
+let responseObj;
+let activeStack;
+let stack = {
+    1: {},
+    2: {},
+    3: {}
+};
+let sizeOfStack_1, sizeOfStack_2, sizeOfStack_3;
+
 // Request all cards from the table
 function getCards() {
 
     let url = 'components/ajax/main_ajax_controller.php';
     let action = 'getCards';
-    
+
     // Create POST request data
     let postData = new FormData();
     postData.append('action', action);
 
     // Create a connection
     let request = new XMLHttpRequest();
-    
+
     // Request setting
     request.open('POST', url);
     request.responseType = 'json';
@@ -38,9 +47,27 @@ function getCards() {
         } else { // if all OK
 
             // Writing the result to a variable
-            let responseObj = request.response;
-            
-            console.log(responseObj);
+            responseObj = request.response;
+
+            let numStack;
+            let idCard;
+
+            for (let key in responseObj) {
+
+                numStack = responseObj[key].stack;
+                idCard = responseObj[key].id;
+
+                stack[numStack][idCard] = responseObj[key];
+
+            }
+
+            sizeOfStack_1 = stack[1].length;
+            sizeOfStack_2 = stack[2].length;
+            sizeOfStack_3 = stack[3].length;
+
+            activeStack = stack[1];
+//            console.log(stack);
+//            console.log(responseObj);
 
         }
     };
