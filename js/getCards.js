@@ -3,6 +3,7 @@
 // Set an event listener for each element. (selector, event, action)
 window.onload = getCards();
 
+let curentNumberActiveCard;
 let responseObj;
 let activeStack;
 let stack = {
@@ -65,7 +66,6 @@ function getCards() {
             sizeOfStack_2 = stack[2].length;
             sizeOfStack_3 = stack[3].length;
 
-            activeStack = stack[1];
 //            console.log(stack);
 //            console.log(responseObj);
 
