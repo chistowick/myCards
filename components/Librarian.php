@@ -35,8 +35,9 @@ class Librarian {
         while ($row = $pdostmt->fetch(PDO::FETCH_ASSOC)) {
             $cards[$i]['id'] = $row['id'];
             $cards[$i]['original'] = $row['original'];
+            $cards[$i]['originalComment'] = $row['original_comment'];
             $cards[$i]['translation'] = $row['translation'];
-            $cards[$i]['comment'] = $row['comment'];
+            $cards[$i]['translationComment'] = $row['translation_comment'];
             $cards[$i]['stack'] = $row['stack'];
             
             $i++;
@@ -47,17 +48,19 @@ class Librarian {
 
     public static function rewriteCard($id){
         // Setting sql query
-        $sql = "UPDATE $this->tablename SET original = ? , translation = ? , comment = ? , stack = ? "
+        $sql = "UPDATE $this->tablename SET original = ? , originalComment = ?, "
+                . "translation = ? , translationComment = ? , stack = ? "
                 . "WHERE id = ? AND login = ?";
 
         // Prepare and execute SQL query
         $pdostmt = $this->dbh->prepare($sql);
         $pdostmt->bindParam(1, $original);
-        $pdostmt->bindParam(2, $translation);
-        $pdostmt->bindParam(3, $comment);
-        $pdostmt->bindParam(4, $stack);
-        $pdostmt->bindParam(5, $id);
-        $pdostmt->bindParam(6, $this->login);
+        $pdostmt->bindParam(2, $originalComment);
+        $pdostmt->bindParam(3, $translation);
+        $pdostmt->bindParam(4, $translationComment);
+        $pdostmt->bindParam(5, $stack);
+        $pdostmt->bindParam(6, $id);
+        $pdostmt->bindParam(7, $this->login);
         $pdostmt->execute();
         
         return;
@@ -77,18 +80,19 @@ class Librarian {
     }
     
     // Adds a card to database
-    public function addCard($original, $translation, $comment, $stack){
+    public function addCard($original, $originalComment, $translation, $translationComment, $stack){
         // Setting sql query
-        $sql = "INSET INTO $this->tablename (original, translation, comment, stack, login) "
-                . "VALUES (? , ? , ? , ? , ?)";
+        $sql = "INSET INTO $this->tablename (original, originalComment, translation, translationComment, stack, login) "
+                . "VALUES (? , ? , ? , ? , ? , ? )";
 
         // Prepare and execute SQL query
         $pdostmt = $this->dbh->prepare($sql);
         $pdostmt->bindParam(1, $original);
-        $pdostmt->bindParam(2, $translation);
-        $pdostmt->bindParam(3, $comment);
-        $pdostmt->bindParam(4, $stack);
-        $pdostmt->bindParam(5, $this->login);
+        $pdostmt->bindParam(2, $originalComment);
+        $pdostmt->bindParam(3, $translation);
+        $pdostmt->bindParam(4, $translationComment);
+        $pdostmt->bindParam(5, $stack);
+        $pdostmt->bindParam(6, $this->login);
         $pdostmt->execute();
         
         return;
