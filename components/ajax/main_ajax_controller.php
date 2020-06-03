@@ -33,7 +33,6 @@ if (isset($_SESSION['access']) AND $_SESSION['access'] == "allowed") {
             case 'getCards':
 
                 // Getting cards from the database
-//                $cards = $librarian->getCards();
                 $cards = $librarian->getCards();
 
                 // Converts the array to JSON and returns it to js-client
@@ -44,7 +43,7 @@ if (isset($_SESSION['access']) AND $_SESSION['access'] == "allowed") {
             case 'rewriteCard':
 
                 // Rewriting a card in the database
-                $librarian->rewriteCard($id);
+                $librarian->rewriteCard($id, $original, $originalComment, $translation, $translationComment, $stack);
 
                 // Getting the updated card
                 $updated_card = $librarian->getOneCard($id);
@@ -66,17 +65,18 @@ if (isset($_SESSION['access']) AND $_SESSION['access'] == "allowed") {
 
             case 'addCard':
 
-                if (!isset($_POST['original'], $_POST['translation'], $_POST['comment'], $_POST['stack'])) {
+                if (!isset($_POST['original'], $_POST['originalComment'], $_POST['translation'], $_POST['translationComment'], $_POST['stack'])) {
                     exit('Не заполнены поля карточки/пустой $_POST');
                 }
 
                 $original = $_POST['original'];
+                $original_comment = $_POST['originalComment'];
                 $translation = $_POST['translation'];
-                $comment = $_POST['comment'];
+                $translation_comment = $_POST['translationComment'];
                 $stack = $_POST['stack'];
 
                 // Adding a card to database
-                $librarian->addCard($original, $translation, $comment, $stack);
+                $librarian->addCard($original, $originalComment, $translation, $translationComment, $stack);
 
                 // Getting the last card from database
                 $last_card = $librarian->getLastCard();
