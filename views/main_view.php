@@ -34,9 +34,9 @@
         </div>
         <div id="wrapper">
             <div id="leftArea">
-                <div id="stack_1" class="cards"><p>stack_1</p></div>
-                <div id="stack_2" class="cards"><p>stack_2</p></div>
-                <div id="stack_3" class="cards"><p>stack_3</p></div>
+                <div id="stack_1" class="cards stack_switch"><p>stack_1</p></div>
+                <div id="stack_2" class="cards stack_switch"><p>stack_2</p></div>
+                <div id="stack_3" class="cards stack_switch"><p>stack_3</p></div>
             </div>
             <div id="rightArea">
                 <div id="menuOptions">
@@ -48,19 +48,42 @@
                             <option value="Карточка_4">Карточка_4</option>
                         </select>
                     </div>
-                    <div id="front_side" class="top_menu"><p>front side</p></div>
-                    <div id="back_side" class="top_menu"><p>back side</p></div>
+                    <div id="front_side_activation" class="top_menu set_active_side">
+                        <p>front side</p>
+                    </div>
+                    <div id="back_side_activation" class="top_menu set_active_side">
+                        <p>back side</p>
+                    </div>
                     <div id="addCard" class="top_menu"><p>add</p></div>
                     <div id="rewriteCard" class="top_menu"><p>edit</p></div>
                     <div id="deleteCard" class="top_menu"><p>delete</p></div>
                 </div>
                 <div id="workArea">
-                    <div id="active_card" class="cards"></div>
+                    <div id="back" class="navigation"><p>BACK</p></div>
+                    <div id="active_stack" class="cards">
+                        <div id="original_side">
+                            <div class="wrap_inf_card">
+                                <div id="original_div"><p id="original"></p></div>
+                                <div id="original_comment_div"><p id="original_comment"></p></div>
+                            </div>
+                        </div>
+                        <div id="translation_side" style="display: none">
+                            <div class="wrap_inf_card">
+                                <div id="translation_div"><p id="translation"></p></div>
+                                <div id="translation_comment_div"><p id="translation_comment"></p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="forward" class="navigation"><p>FORWARD</p></div>
                 </div>
             </div>
         </div>
         <div id="footer"><p id="copy">&copy; 2020 Анатолий Чиняев</p></div>
 
+        <script src='vendor/components/jquery/jquery.min.js'></script>
         <script src='js/getCards.js'></script>
+        <script src='js/stackSwitch.js'></script>
+        <script src='js/showCard.js'></script>
+        <script src='js/settings.js'></script>
     </body>
 </html>
