@@ -3,9 +3,17 @@
 // Массив ссылок на карточки в активном стеке
 let activeCardsArray = [];
 
+// Настройки активной стороны карточки по умолчанию
+let activeSideId = '#original_side';
+let inactiveSideId = '#translation_side';
+
 // По клику на определенный стек (одну из стопок карт):
 $(document).ready(function () {
     $('.stack_switch').click(function () {
+
+        // Устанавливаем активную сторону карточки по умолчанию
+        $(activeSideId).css({'display': 'block'});
+        $(inactiveSideId).css({'display': 'none'});
 
         // Определяем идентификатор стека, по которому был клик
         let id = $(this).attr('id');
@@ -37,7 +45,7 @@ $(document).ready(function () {
 
         }
 //        console.log(activeStack);
-        
+
         // Итерируем активный стек и наполняем массив активных карточек для 
         // более удобного манипулирования карточками
         let j = 0;
@@ -52,10 +60,11 @@ $(document).ready(function () {
         curentNumberActiveCard = -1;
 //        console.log(activeCardsArray);
 
-        // Очищаем данные выводимые с карточки предыдущего активного стека
+        // Очищаем данные предыдущей карточки
         document.querySelector('#original').innerHTML = ``;
+        document.querySelector('#original_comment').innerHTML = ``;
         document.querySelector('#translation').innerHTML = ``;
-        document.querySelector('#comment').innerHTML = ``;
+        document.querySelector('#translation_comment').innerHTML = ``;
 
     });
 });
